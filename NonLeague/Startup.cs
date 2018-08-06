@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NonLeague.Services;
 
 namespace NonLeague
 {
@@ -33,6 +34,12 @@ namespace NonLeague
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // Add application services
+            services.AddScoped<ILeagueService, LeagueXMLService>();
+            services.AddScoped<ISeasonService, CurrentSeasonService>();
+            services.AddScoped<IMatchService, CurrentMatchService>();
+            services.AddScoped<ITableService, LeagueTableService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,14 +57,8 @@ namespace NonLeague
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
