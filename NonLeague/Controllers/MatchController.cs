@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
 using NonLeague.Models;
 using NonLeague.Helper;
 using NonLeague.Services;
@@ -10,11 +11,13 @@ namespace NonLeague.Controllers
     {
         private readonly IMatchService _matchService;
         private readonly ILeagueService _leagueService;
+        private readonly IHostingEnvironment _hostingEnvironment;
         
-        public MatchController(IMatchService matchService, ILeagueService leagueService)
+        public MatchController(IMatchService matchService, ILeagueService leagueService, IHostingEnvironment hostingEnvironment)
         {
             _matchService = matchService;
             _leagueService = leagueService;
+            _hostingEnvironment = hostingEnvironment;
         }
         
         [Route("Match/Competition/{compID:int}/Season/{monthID:int}")]
@@ -24,7 +27,7 @@ namespace NonLeague.Controllers
             var matchesCompetitionRoot = await _matchService.GetFixturesForMonth(compID, monthID);
 
             var matchesCompetitionHelper = new MatchesCompetitionHelper();
-            matchesCompetitionHelper.Description = _leagueService.GetDescription(compID);
+            matchesCompetitionHelper.Description = _leagueService.GetDescription(compID, _hostingEnvironment.WebRootPath);
             matchesCompetitionHelper.MatchesCompetition = matchesCompetitionRoot.MatchesCompetition;
 
             return View(matchesCompetitionHelper);

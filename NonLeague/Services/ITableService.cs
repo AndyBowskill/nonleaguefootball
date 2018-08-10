@@ -6,7 +6,6 @@ namespace NonLeague.Services
     public interface ITableService
     {
         Task<LeagueTableRoot> GetTable(int competitionID);
-
     }
     
 }

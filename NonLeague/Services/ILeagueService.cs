@@ -5,8 +5,8 @@ namespace NonLeague.Services
 {
     public interface ILeagueService
     {
-        IEnumerable<League> GetAll();
-        string GetDescription(int competitionID);
+        IEnumerable<League> GetAll(string webRoot);
+        string GetDescription(int competitionID, string webRoot);
     }
     
 }

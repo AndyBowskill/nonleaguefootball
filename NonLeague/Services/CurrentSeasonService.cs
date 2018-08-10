@@ -9,9 +9,9 @@ namespace NonLeague.Services
 {
     public class CurrentSeasonService : ISeasonService
     {
-        public IEnumerable<Month> GetSeason()
+        public IEnumerable<Month> GetSeason(string webRoot)
         {
-            var season = from element in XDocument.Load("AppData/season.xml").Descendants("month") select element;
+            var season = from element in XDocument.Load(webRoot + "/xml/season.xml").Descendants("month") select element;
             
             List<Month> seasonList = new List<Month>();
             

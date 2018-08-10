@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 using NonLeague.Models;
 
 namespace NonLeague.Services
@@ -10,10 +12,10 @@ namespace NonLeague.Services
     {
         private List<League> leagueList;
          
-        public IEnumerable<League> GetAll()
+        public IEnumerable<League> GetAll(string webRoot)
         {
-            var leagues = from element in XDocument.Load("AppData/leagues.xml").Descendants("league") select element;
-            
+            var leagues = from element in XDocument.Load(webRoot + "/xml/leagues.xml").Descendants("league") select element;
+
             leagueList = new List<League>();
             
             foreach (var item in leagues)
@@ -31,13 +33,13 @@ namespace NonLeague.Services
             
         }
         
-        public string GetDescription(int competitionID)
+        public string GetDescription(int competitionID, string webRoot)
         {
             // ToDo - Prevent exception if user uses URL to ask for a competition that doesn't exist (e.g. 1,2,3,etc.)
             
             if (leagueList == null)
             {
-                leagueList = GetAll().ToList();
+                leagueList = GetAll(webRoot).ToList();
             }
             
             League league = leagueList.First(item => item.CompetitionID == competitionID);            

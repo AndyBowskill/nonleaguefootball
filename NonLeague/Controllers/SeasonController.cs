@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
 using NonLeague.Models;
 using NonLeague.Helper;
 using NonLeague.Services;
@@ -9,11 +10,13 @@ namespace NonLeague.Controllers
     {
         private readonly ISeasonService _seasonService;
         private readonly ILeagueService _leagueService;
+        private readonly IHostingEnvironment _hostingEnvironment;
         
-        public SeasonController(ISeasonService seasonService, ILeagueService leagueService)
+        public SeasonController(ISeasonService seasonService, ILeagueService leagueService, IHostingEnvironment hostingEnvironment)
         {
             _seasonService = seasonService;
             _leagueService = leagueService;
+            _hostingEnvironment = hostingEnvironment;
         }
         
         [Route("Match/Competition/{compID:int}/[controller]")]
@@ -21,8 +24,8 @@ namespace NonLeague.Controllers
         {
             var leagueSeasonHelper = new LeagueSeasonHelper();
             leagueSeasonHelper.CompetitionID = compID;
-            leagueSeasonHelper.Description = _leagueService.GetDescription(compID);
-            leagueSeasonHelper.Season = _seasonService.GetSeason();
+            leagueSeasonHelper.Description = _leagueService.GetDescription(compID, _hostingEnvironment.WebRootPath);
+            leagueSeasonHelper.Season = _seasonService.GetSeason(_hostingEnvironment.WebRootPath);
 
             return View(leagueSeasonHelper);
         }

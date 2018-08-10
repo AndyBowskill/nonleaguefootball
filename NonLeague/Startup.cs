@@ -51,7 +51,8 @@ namespace NonLeague
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Competition/Error");
+                //app.UseDeveloperExceptionPage();
                 app.UseHsts();
             }
 
