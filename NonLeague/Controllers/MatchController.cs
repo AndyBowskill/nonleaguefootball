@@ -20,7 +20,7 @@ namespace NonLeague.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
         
-        [Route("Match/Competition/{compID:int}/Season/{monthID:int}")]
+        [Route("match/competition/{compID:int}/season/{monthID:int}")]
         public async Task<IActionResult> Index(int compID, int monthID)
         {
             //ToDo - Return matches node from service

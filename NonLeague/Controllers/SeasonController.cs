@@ -19,7 +19,7 @@ namespace NonLeague.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
         
-        [Route("Match/Competition/{compID:int}/[controller]")]
+        [Route("match/competition/{compID:int}/[controller]")]
         public IActionResult Index(int compID)
         {
             var leagueSeasonHelper = new LeagueSeasonHelper();

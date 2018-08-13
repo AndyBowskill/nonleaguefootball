@@ -32,7 +32,7 @@ namespace NonLeague
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Add application services

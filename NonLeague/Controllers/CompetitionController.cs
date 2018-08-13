@@ -21,7 +21,7 @@ namespace NonLeague.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        [Route("Match/[controller]")]
+        [Route("match/[controller]")]
         [Route("")]
         public IActionResult Match()
         {            
@@ -30,7 +30,7 @@ namespace NonLeague.Controllers
             return View(model);
         }
 
-        [Route("Table/[controller]")]
+        [Route("table/[controller]")]
         public IActionResult Table()
         {
             var model = _leagueService.GetAll(_hostingEnvironment.WebRootPath);

@@ -20,7 +20,7 @@ namespace NonLeague.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
         
-        [Route("Table/Competition/{compID:int}/[controller]")]
+        [Route("table/competition/{compID:int}/[controller]")]
         public async Task<IActionResult> Index(int compID)
         {
             //ToDo - Return league table node from service
