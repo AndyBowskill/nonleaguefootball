@@ -8,6 +8,10 @@ body {
     padding-right: 15px;
 }
 
+.navbar-inverse-dark {
+    background-color: #000;
+}
+
 .navbar-brand {
     padding: 6px 15px;
 }
