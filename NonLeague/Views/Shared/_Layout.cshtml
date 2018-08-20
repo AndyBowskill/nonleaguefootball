@@ -23,7 +23,7 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-inverse-dark navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -46,11 +46,18 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - Non League</p>
-        </footer>
     </div>
+
+    <footer>
+        <hr />
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="center-align text-muted">2018 &copy; Non League</p>
+                </div>
+            </div>
+       </div>
+     </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

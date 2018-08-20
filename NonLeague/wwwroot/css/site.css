@@ -1,6 +1,5 @@
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
 }
 
 .body-content {
@@ -8,12 +7,40 @@ body {
     padding-right: 15px;
 }
 
-.navbar-inverse-dark {
-    background-color: #000;
+.navbar-custom {
+    background-color: #c7dbb6;
+}
+
+.navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+    background-color: transparent;
+}
+
+.navbar-custom .navbar-toggle {
+    border-color: transparent;
+}
+
+.navbar-custom .navbar-toggle .icon-bar {
+    background-color: #555;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color: #555;
 }
 
 .navbar-brand {
     padding: 6px 15px;
+}
+
+footer {
+    padding-bottom: 10px;
+}
+
+a {
+    color: #555;
+}
+
+a:hover {
+    color: #333;
 }
 
 .right-align {
@@ -24,7 +51,7 @@ body {
     text-align: center;
 }
 
- .left_align {
+.left_align {
     text-align: left;
 }
 

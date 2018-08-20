@@ -12,9 +12,12 @@ namespace NonLeague.Models
         }
         public string Status { get; set; }
         public string HomeTeamName { get; set; }
+        public int HomeTeamHalfTimeScore { get; set; }
         public int HomeTeamScore { get; set; }
         public string AwayTeamName { get; set; }
+        public int AwayTeamHalfTimeScore { get; set; }
         public int AwayTeamScore { get; set ;}
+        public int Attendance { get; set; }
     }
 
     public class MatchesCompetition
