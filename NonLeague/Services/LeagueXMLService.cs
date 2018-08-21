@@ -40,7 +40,9 @@ namespace NonLeague.Services
             {
                 if (competitionID == Convert.ToInt32(item.Attribute("competitionID").Value))
                 {
-                   leagueDescription = string.Format("{0} - {1}", item.Attribute("name").Value, item.Attribute("division").Value);
+                   string leagueName = item.Attribute("name").Value;
+                   string leagueDivision = item.Attribute("division").Value;
+                   leagueDescription = leagueDivision == "" ? leagueName : string.Format("{0} - {1}", leagueName, leagueDivision);
                    break;
                 }
          

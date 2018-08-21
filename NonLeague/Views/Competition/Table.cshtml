@@ -1,18 +1,30 @@
 @model IEnumerable<NonLeague.Models.League>
 @{
     ViewData["Title"] = "Tables";
+    int step = 0;
 }
 
 <h3>Tables</h3>
 <hr />
 
 <div class="list-group">
-@foreach(var league in Model)
-{
-  <a asp-controller="Table" asp-action="Index" asp-route-compid=@league.CompetitionID class="list-group-item">
-    <h4 class="list-group-item-heading">@league.Name</h4>
-    <h5 class="list-group-item-heading">@league.Division</h5>
-    <p class="list-group-item-text">@league.Sponsor</p>
-  </a>
-}    
+    @foreach (var league in Model)
+    {
+        @if (step != @league.Step)
+        {
+            <h4>Step @league.Step</h4>
+            step = @league.Step;
+        }
+            <a asp-controller="Table" asp-action="Index" asp-route-compid=@league.CompetitionID class="list-group-item">
+                @if (league.Division == "")
+                {
+                    <p class="list-group-item-heading">@league.Name</p>
+                }
+                else
+                {   
+                    <p class="list-group-item-heading">@league.Name - @league.Division</p>
+                }
+                <p class="list-group-item-text">@league.Sponsor</p>
+            </a>
+    }
 </div>
