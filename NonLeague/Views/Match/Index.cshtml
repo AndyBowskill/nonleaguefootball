@@ -41,26 +41,26 @@
 
     @if (inProgress)
     {
-        <div class="row">
-            <div class="col-xs-5 right-align">
-                <p class="no-gutters-vertical text-muted">@match.Status</p>
-            </div>
-            <div class="col-xs-2 center-align no-gutters-horizontal">
-                <p class="no-gutters-vertical text-muted">@match.HomeTeamHalfTimeScore - @match.AwayTeamHalfTimeScore</p>
-            </div>
-            <div class="col-xs-5 left-align">
-                @if (@match.Attendance > 0)
-                {
-                <p class="no-gutters-vertical text-muted">Attendance: @match.Attendance</p>
-                }
-            </div>
+    <div class="row">
+        <div class="col-xs-5 right-align">
+            <p class="no-gutters-vertical text-muted">@match.Status</p>
         </div>
+        <div class="col-xs-2 center-align no-gutters-horizontal">
+            <p class="no-gutters-vertical text-muted">@match.HomeTeamHalfTimeScore - @match.AwayTeamHalfTimeScore</p>
+        </div>
+        <div class="col-xs-5 left-align">
+            @if (@match.Attendance > 0)
+            {
+                <p class="no-gutters-vertical text-muted">Attendance: @match.Attendance</p>
+            }
+        </div>
+    </div>
     }
 
     <div class="row">
         <div class="col-xs-2">
         </div>
-        <div class="col-xs-8 ">
+        <div class="col-xs-8">
             <hr class="no-gutters-vertical" />
         </div>
         <div class="col-xs-2">
