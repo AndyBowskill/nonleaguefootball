@@ -7,6 +7,12 @@
 <h3>Fixtures / Results</h3>
 <hr />
 <div class="list-group">
+    <a asp-controller="MatchThisWeek" asp-action="Index" class="list-group-item">
+        <p class="list-group-item-heading">Today</p>
+    </a>
+</div>
+<hr />
+<div class="list-group">
     @foreach (var league in Model)
     {
         @if (step != @league.Step)

@@ -1,0 +1,76 @@
+﻿@model List<NonLeague.Models.MatchesCompetition>
+@{
+    ViewData["Title"] = "Fixture / Results";
+    string validDate = null;
+}
+
+<h3>Fixtures / Results</h3>
+
+@foreach (var league in Model)
+{
+    <hr />
+    <h3>@league.Competition</h3>
+
+    @foreach (var match in league.Match)
+    {
+        @if (validDate != @match.Date)
+        {
+            <h4>@match.Date</h4>
+            validDate = @match.Date;
+        }
+
+        bool inProgress = !@match.Status.Contains("Kick off");
+
+        <div class="row">
+
+            <div class="col-xs-5 right-align">
+                <p class="no-gutters-vertical">@match.HomeTeamName</p>
+            </div>
+            <div class="col-xs-2 center-align bold no-gutters-horizontal">
+                @if (!inProgress)
+                {
+                    <p class="no-gutters-vertical">@match.Time</p>
+                }
+                else
+                {
+                    <p class="no-gutters-vertical">@match.HomeTeamScore - @match.AwayTeamScore</p>
+                }
+            </div>
+            <div class="col-xs-5 left-align">
+                <p class="no-gutters-vertical">@match.AwayTeamName</p>
+            </div>
+
+        </div>
+
+        @if (inProgress)
+        {
+            <div class="row">
+                <div class="col-xs-5 right-align">
+                    <p class="no-gutters-vertical text-muted">@match.Status</p>
+                </div>
+                <div class="col-xs-2 center-align no-gutters-horizontal">
+                    <p class="no-gutters-vertical text-muted">@match.HomeTeamHalfTimeScore - @match.AwayTeamHalfTimeScore</p>
+                </div>
+                <div class="col-xs-5 left-align">
+                    @if (@match.Attendance > 0)
+                    {
+                        <p class="no-gutters-vertical text-muted">Attendance: @match.Attendance</p>
+                    }
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-8">
+                <hr class="no-gutters-vertical" />
+            </div>
+            <div class="col-xs-2">
+            </div>
+        </div>
+
+    }
+
+}
+
