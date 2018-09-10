@@ -20,7 +20,7 @@
             <h4>Step @league.Step</h4>
             step = @league.Step;
         }
-            <a asp-controller="Season" asp-action="Index" asp-route-compid=@league.CompetitionID class="list-group-item">
+            <a asp-controller="Season" asp-action="Index" asp-route-competitionid=@league.CompetitionID class="list-group-item">
                 @if (league.Division == "")
                 {
                     <p class="list-group-item-heading">@league.Name</p>

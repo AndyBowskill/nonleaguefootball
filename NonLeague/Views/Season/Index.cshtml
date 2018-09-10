@@ -10,7 +10,7 @@
 <div class="list-group">
 @foreach(var month in Model.Season)
 {
-  <a asp-controller="Match" asp-action="Index" asp-route-compid=@Model.CompetitionID asp-route-monthid=@month.ID class="list-group-item">
+  <a asp-controller="Match" asp-action="Index" asp-route-competitionid=@Model.CompetitionID asp-route-monthid=@month.ID class="list-group-item">
     <p class="list-group-item-heading">@month.Name</p>
   </a>
 }

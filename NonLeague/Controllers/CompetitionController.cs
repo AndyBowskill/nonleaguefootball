@@ -21,16 +21,16 @@ namespace NonLeague.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        [Route("match/[controller]")]
+        [Route("fixturesandresults")]
         [Route("")]
-        public IActionResult Match()
+        public IActionResult FixturesAndResults()
         {            
             var model = _leagueService.GetAll(_hostingEnvironment.WebRootPath);
 
             return View(model);
         }
 
-        [Route("table/[controller]")]
+        [Route("tables")]
         public IActionResult Table()
         {
             var model = _leagueService.GetAll(_hostingEnvironment.WebRootPath);

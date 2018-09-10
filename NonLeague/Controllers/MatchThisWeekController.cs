@@ -20,7 +20,7 @@ namespace NonLeague.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
         
-        [Route("match/competition/all")]
+        [Route("fixturesandresults/today")]
         public async Task<IActionResult> Index()
         {
 

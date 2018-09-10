@@ -20,14 +20,16 @@ namespace NonLeague.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
         
-        [Route("match/competition/{compID:int}/season/{monthID:int}")]
-        public async Task<IActionResult> Index(int compID, int monthID)
+        [Route("fixturesandresults/season/details")]
+        [HttpGet("{competitionid:int}")]
+        [HttpGet("{monthid:int}")]
+        public async Task<IActionResult> Index(int competitionID, int monthID)
         {
             //ToDo - Return matches node from service
-            var matchesCompetitionRoot = await _matchService.GetFixturesForMonth(compID, monthID);
+            var matchesCompetitionRoot = await _matchService.GetFixturesForMonth(competitionID, monthID);
 
             var matchesCompetitionHelper = new MatchesCompetitionHelper();
-            matchesCompetitionHelper.Description = _leagueService.GetDescription(compID, _hostingEnvironment.WebRootPath);
+            matchesCompetitionHelper.Description = _leagueService.GetDescription(competitionID, _hostingEnvironment.WebRootPath);
             matchesCompetitionHelper.MatchesCompetition = matchesCompetitionRoot.MatchesCompetition;
 
             return View(matchesCompetitionHelper);
