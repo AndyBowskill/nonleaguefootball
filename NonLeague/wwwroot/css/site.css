@@ -69,6 +69,15 @@ a:hover {
     margin-bottom: 4px;
 }
 
+.table {
+    margin-bottom: 0px;
+}
+
+.table > tbody > tr > td.muted {
+    border: 0px;
+    border-collapse: collapse;
+}
+
 .bmc-button img {
     width: 27px !important;
     margin-bottom: 1px !important;
