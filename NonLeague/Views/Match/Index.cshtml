@@ -1,4 +1,4 @@
-@model NonLeague.Helper.MatchesCompetitionHelper
+@model NonLeague.Models.MatchesCompetition
 @{
     ViewData["Title"] = "Fixture / Results";
     string validDate = null;
@@ -6,10 +6,10 @@
 
 <h3>Fixtures / Results</h3>
 <hr />
-<h3>@Model.Description</h3>
+<h3>@Model.Competition</h3>
 
-<table class="table table-condensed">
-    @foreach (var match in Model.MatchesCompetition.Match)
+<table class="table table-condensed no-gutters-horizontal">
+    @foreach (var match in Model.Match)
     {
         @if (validDate != @match.Date)
         {
@@ -24,18 +24,18 @@
 
         bool inProgress = !@match.Status.Contains("Kick off");
 
-        <tr>
-            <td class="text-right">@match.HomeTeamName</td>
-            @if (inProgress)
-            {
-                <td class="text-center bold">@match.HomeTeamScore - @match.AwayTeamScore</td>
-            }
-            else
-            {
-                <td class="text-center bold">@match.Time</td>
-            }
-            <td class="text-left">@match.AwayTeamName</td>
-        </tr>
+            <tr>
+                <td class="text-right">@match.HomeTeamName</td>
+                @if (inProgress)
+                {
+                    <td class="text-center bold">@match.HomeTeamScore - @match.AwayTeamScore</td>
+                }
+                else
+                {
+                    <td class="text-center bold">@match.Time</td>
+                }
+                <td class="text-left">@match.AwayTeamName</td>
+            </tr>
 
         @if (inProgress)
         {

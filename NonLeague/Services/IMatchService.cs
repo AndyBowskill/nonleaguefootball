@@ -6,7 +6,7 @@ namespace NonLeague.Services
 {
     public interface IMatchService
     {
-        Task<MatchesCompetitionRoot> GetFixturesForMonth(int competitionID, int monthID);
+        Task<MatchesCompetition> GetFixturesForMonth(int competitionID, int monthID);
         Task<List<MatchesCompetition>> GetFixturesForToday();
        
 

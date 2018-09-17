@@ -10,10 +10,11 @@ namespace NonLeague.Services
 {
     public class CurrentMatchService : IMatchService
     {
-        public async Task<MatchesCompetitionRoot> GetFixturesForMonth(int competitionID, int monthID)
+        public async Task<MatchesCompetition> GetFixturesForMonth(int competitionID, int monthID)
         {
             string responseJson = "";
-            MatchesCompetitionRoot root = null;
+            MatchesCompetitionRoot root = new MatchesCompetitionRoot();
+            MatchesCompetition monthsMatches = new MatchesCompetition();
             
             using (var client = new HttpClient())
             {
@@ -27,11 +28,12 @@ namespace NonLeague.Services
                 {
                     responseJson = await response.Content.ReadAsStringAsync();
                     root = JsonConvert.DeserializeObject<MatchesCompetitionRoot>(responseJson);
+                    monthsMatches = root.MatchesCompetition;
                 }
-                    
+
             }
             
-            return root;
+            return monthsMatches;
 
         }
 

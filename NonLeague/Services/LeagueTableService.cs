@@ -9,14 +9,15 @@ namespace NonLeague.Services
 {
     public class LeagueTableService : ITableService
     {
-        public async Task<LeagueTableRoot> GetTable(int competitionID)
+        public async Task<LeagueTable> GetTable(int competitionID)
         {
             string responseJson = "";
-            LeagueTableRoot root = null;
+            LeagueTableRoot root = new LeagueTableRoot();
+            LeagueTable leagueTable = new LeagueTable();
             
             using (var client = new HttpClient())
             {
-                var URI = string.Format("http://www.footballwebpages.co.uk/league.json?comp={0}",competitionID);
+                var URI = string.Format("https://www.footballwebpages.co.uk/league.json?comp={0}",competitionID);
                 client.BaseAddress = new Uri(URI);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -26,10 +27,11 @@ namespace NonLeague.Services
                 {
                     responseJson = await response.Content.ReadAsStringAsync();
                     root = JsonConvert.DeserializeObject<LeagueTableRoot>(responseJson);
+                    leagueTable = root.LeagueTable;
                 }
             }
             
-            return root;
+            return leagueTable;
             
         }
     }

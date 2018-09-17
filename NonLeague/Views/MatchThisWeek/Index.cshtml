@@ -2,75 +2,93 @@
 @{
     ViewData["Title"] = "Fixture / Results";
     string validDate = null;
+    int leagueHeaderID = 0;
+    int leagueBodyID = 0;
 }
 
 <h3>Fixtures / Results</h3>
+<hr />
 
-@foreach (var league in Model)
-{
-    <hr />
-    <h3>@league.Competition</h3>
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="dropdown">
+        <a href="#" class="dropdown-toggle" id="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h4>League <span class="caret"></span></h4></a>
 
-    @foreach (var match in league.Match)
-    {
-        @if (validDate != @match.Date)
+        <ul class="dropdown-menu" id="dropdown" aria-labelledby="dropdown">
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">National League</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">National League North</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">National League South</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Evo-Stik League Premier Division</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Evo-Stik Southern Premier Central</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Evo-Stik Southern Premier South</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Bostik League Premier Division</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Evo-Stik League First Division East</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Evo-Stik League First Division West</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Evo-Stik Southern Division One Central</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Evo-Stik Southern Division One South</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Bostik League North Division</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Bostik League South Central Division</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Bostik League South East Division</a></li>
+        </ul>
+    </li>
+    </ul>
+
+    <table class="table table-condensed">
+        @foreach (var league in Model)
         {
-            <h4>@match.Date</h4>
-            validDate = @match.Date;
-        }
+            <tr id="league-@(++leagueBodyID)">
+                <th colspan="3">
+                    <h3>@league.Competition</h3>
+                </th>
+            </tr>
 
-        bool inProgress = !@match.Status.Contains("Kick off");
-
-        <div class="row">
-
-            <div class="col-xs-5 right-align">
-                <p class="no-gutters-vertical">@match.HomeTeamName</p>
-            </div>
-            <div class="col-xs-2 center-align bold no-gutters-horizontal">
-                @if (!inProgress)
+            @foreach (var match in league.Match)
+            {
+                @if (validDate != @match.Date)
                 {
-                    <p class="no-gutters-vertical">@match.Time</p>
+                    validDate = @match.Date;
+                    <tr>
+                        <th colspan="3">
+                            <h4>@match.Date</h4>
+                        </th>
+                    </tr>
                 }
-                else
-                {
-                    <p class="no-gutters-vertical">@match.HomeTeamScore - @match.AwayTeamScore</p>
-                }
-            </div>
-            <div class="col-xs-5 left-align">
-                <p class="no-gutters-vertical">@match.AwayTeamName</p>
-            </div>
 
-        </div>
+                bool inProgress = !@match.Status.Contains("Kick off");
 
-        @if (inProgress)
-        {
-            <div class="row">
-                <div class="col-xs-5 right-align">
-                    <p class="no-gutters-vertical text-muted">@match.Status</p>
-                </div>
-                <div class="col-xs-2 center-align no-gutters-horizontal">
-                    <p class="no-gutters-vertical text-muted">@match.HomeTeamHalfTimeScore - @match.AwayTeamHalfTimeScore</p>
-                </div>
-                <div class="col-xs-5 left-align">
-                    @if (@match.Attendance > 0)
+                <tr>
+                    <td class="text-right">@match.HomeTeamName</td>
+                    @if (inProgress)
                     {
-                        <p class="no-gutters-vertical text-muted">Attendance: @match.Attendance</p>
+                        <td class="text-center bold">@match.HomeTeamScore - @match.AwayTeamScore</td>
                     }
-                </div>
-            </div>
+                    else
+                    {
+                        <td class="text-center bold">@match.Time</td>
+                    }
+                    <td class="text-left">@match.AwayTeamName</td>
+                </tr>
+
+                @if (inProgress)
+                {
+                    <tr>
+                        <td class="text-right text-muted muted">@match.Status</td>
+                        <td class="text-center text-muted muted">@match.HomeTeamHalfTimeScore - @match.AwayTeamHalfTimeScore</td>
+
+                        @if (@match.Attendance > 0)
+                        {
+                            <td class="text-left text-muted muted">Attendance: @match.Attendance</td>
+                        }
+                        else
+                        {
+                            <td class="text-left text-muted muted"></td>
+                        }
+                    </tr>
+                }
+
+            }
         }
-
-        <div class="row">
-            <div class="col-xs-2">
-            </div>
-            <div class="col-xs-8">
-                <hr class="no-gutters-vertical" />
-            </div>
-            <div class="col-xs-2">
-            </div>
-        </div>
-
-    }
-
-}
+    </table>
 
