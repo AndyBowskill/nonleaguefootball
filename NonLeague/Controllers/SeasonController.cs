@@ -22,10 +22,12 @@ namespace NonLeague.Controllers
         [HttpGet("{competitionID:int}")]
         public IActionResult Index(int competitionID)
         {
-            var leagueSeasonHelper = new LeagueSeasonHelper();
-            leagueSeasonHelper.CompetitionID = competitionID;
-            leagueSeasonHelper.Description = _leagueService.GetDescription(competitionID, _hostingEnvironment.WebRootPath);
-            leagueSeasonHelper.Season = _seasonService.GetSeason(_hostingEnvironment.WebRootPath);
+            var leagueSeasonHelper = new LeagueSeasonHelper
+            {
+                CompetitionID = competitionID,
+                Competition = _leagueService.GetCompetition(competitionID, _hostingEnvironment.WebRootPath),
+                Season = _seasonService.GetSeason(_hostingEnvironment.WebRootPath)
+            };
 
             return View(leagueSeasonHelper);
         }

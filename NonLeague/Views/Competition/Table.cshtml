@@ -16,15 +16,7 @@
             step = @league.Step;
         }
             <a asp-controller="Table" asp-action="Index" asp-route-competitionid=@league.CompetitionID class="list-group-item">
-                @if (league.Division == "")
-                {
-                    <p class="list-group-item-heading">@league.Name</p>
-                }
-                else
-                {   
-                    <p class="list-group-item-heading">@league.Name - @league.Division</p>
-                }
-                <p class="list-group-item-text">@league.Sponsor</p>
+                <p class="list-group-item-heading">@league.Competition</p>
             </a>
     }
 </div>

@@ -20,9 +20,7 @@ namespace NonLeague.Services
             foreach (var item in leagues)
             {
                 leagueList.Add(new League() {
-                    Name = item.Attribute("name").Value,
-                    Division = item.Attribute("division").Value,
-                    Sponsor = item.Attribute("sponsor").Value,
+                    Competition = item.Attribute("competition").Value,
                     Step = Convert.ToInt32(item.Attribute("step").Value),
                     CompetitionID = Convert.ToInt32(item.Attribute("competitionID").Value)
                 });
@@ -31,29 +29,27 @@ namespace NonLeague.Services
             return leagueList;
         }
 
-        public string GetDescription(int competitionID, string webRoot)
+        public string GetCompetition(int competitionID, string webRoot)
         {
             var leagues = GetLeaguesFromXML(webRoot);
-            string leagueDescription = null;
+            string competition = null;
 
             foreach (var item in leagues)
             {
                 if (competitionID == Convert.ToInt32(item.Attribute("competitionID").Value))
                 {
-                   string leagueName = item.Attribute("name").Value;
-                   string leagueDivision = item.Attribute("division").Value;
-                   leagueDescription = leagueDivision == "" ? leagueName : string.Format("{0} - {1}", leagueName, leagueDivision);
+                   competition = item.Attribute("competition").Value;
                    break;
                 }
          
             }
 
-            if (leagueDescription == null)
+            if (competition == null)
             {
-                leagueDescription = "N/A";
+                competition = "N/A";
             }
 
-            return leagueDescription;
+            return competition;
         }
 
         private IEnumerable<XElement> GetLeaguesFromXML(string webRoot)

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <leagues>
-	<league name="National League" division="" sponsor="Sponsored by Vanarama" step="1" competitionID="5" />
-	<league name="National League North" division="" sponsor="Sponsored by Vanarama" step="2" competitionID="6" />
-	<league name="National League South" division="" sponsor="Sponsored by Vanarama" step="2" competitionID="7" />
-	<league name="Northern Premier League" division="Premier Division" sponsor="Sponsored by Evo-Stik" step="3" competitionID="14" />
-	<league name="Southern League" division="Premier Central" sponsor="Sponsored by Evo-Stik" step="3" competitionID="8" />
-  <league name="Southern League" division="Premier South" sponsor="Sponsored by Evo-Stik" step="3" competitionID="39" />
-  <league name="Isthmian League" division="Premier Division" sponsor="Sponsored by Bostik" step="3" competitionID="11" />
-   	<league name="Northern Premier League" division="First Division East" sponsor="Sponsored by Evo-Stik" step="4" competitionID="15" />
-    <league name="Northern Premier League" division="First Division West" sponsor="Sponsored by Evo-Stik" step="4" competitionID="16" />
-   	<league name="Southern League" division="Division One Central" sponsor="Sponsored by Evo-Stik" step="4" competitionID="9" />
-   	<league name="Southern League" division="Division One South" sponsor="Sponsored by Evo-Stik" step="4" competitionID="10" />
-	<league name="Isthmian League" division="Division North" sponsor="Sponsored by Bostik" step="4" competitionID="12" />
-	<league name="Isthmian League" division="Division South Central" sponsor="Sponsored by Bostik" step="4" competitionID="13" />
-  <league name="Isthmian League" division="Division South East" sponsor="Sponsored by Bostik" step="4" competitionID="40" />
+	<league competition="Vanarama National League" step="1" competitionID="5" />
+	<league competition="Vanarama National League North" step="2" competitionID="6" />
+	<league competition="Vanarama National League South" step="2" competitionID="7" />
+	<league competition="Evo-Stik League Premier Division" step="3" competitionID="14" />
+	<league competition="Evo-Stik Southern Premier Central" step="3" competitionID="8" />
+  <league competition="Evo-Stik Southern Premier South" step="3" competitionID="39" />
+  <league competition="Bostik League Premier Division" step="3" competitionID="11" />
+  <league competition="Evo-Stik League First Division East" step="4" competitionID="15" />
+  <league competition="Evo-Stik League First Division West" step="4" competitionID="16" />
+  <league competition="Evo-Stik Southern Division One Central" step="4" competitionID="9" />
+  <league competition="Evo-Stik Southern Division One South" step="4" competitionID="10" />
+	<league competition="Bostik League North Division" step="4" competitionID="12" />
+	<league competition="Bostik League South Central Division" step="4" competitionID="13" />
+  <league competition="Bostik League South East Division" step="4" competitionID="40" />
 </leagues>

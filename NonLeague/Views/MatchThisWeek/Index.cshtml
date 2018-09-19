@@ -14,10 +14,10 @@
         <a href="#" class="dropdown-toggle" id="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h4>League <span class="caret"></span></h4></a>
 
         <ul class="dropdown-menu" id="dropdown" aria-labelledby="dropdown">
-            <li><a data-scroll href="#league-@(++leagueHeaderID)">National League</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Vanarama National League</a></li>
             <li role="separator" class="divider"></li>
-            <li><a data-scroll href="#league-@(++leagueHeaderID)">National League North</a></li>
-            <li><a data-scroll href="#league-@(++leagueHeaderID)">National League South</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Vanarama National League North</a></li>
+            <li><a data-scroll href="#league-@(++leagueHeaderID)">Vanarama National League South</a></li>
             <li role="separator" class="divider"></li>
             <li><a data-scroll href="#league-@(++leagueHeaderID)">Evo-Stik League Premier Division</a></li>
             <li><a data-scroll href="#league-@(++leagueHeaderID)">Evo-Stik Southern Premier Central</a></li>
@@ -33,62 +33,63 @@
             <li><a data-scroll href="#league-@(++leagueHeaderID)">Bostik League South East Division</a></li>
         </ul>
     </li>
-    </ul>
+</ul>
 
-    <table class="table table-condensed">
-        @foreach (var league in Model)
+<hr />
+
+<table class="table table-condensed no-gutters-horizontal">
+    @foreach (var league in Model)
+    {
+        <tr id="league-@(++leagueBodyID)">
+            <th colspan="3">
+                <h3>@league.Competition</h3>
+            </th>
+        </tr>
+
+        @foreach (var match in league.Match)
         {
-            <tr id="league-@(++leagueBodyID)">
-                <th colspan="3">
-                    <h3>@league.Competition</h3>
-                </th>
+            @if (validDate != @match.Date)
+            {
+                validDate = @match.Date;
+                <tr>
+                    <th colspan="3">
+                        <h4>@match.Date</h4>
+                    </th>
+                </tr>
+            }
+
+            bool inProgress = !@match.Status.Contains("Kick off");
+
+            <tr>
+                <td class="text-right">@match.HomeTeamName</td>
+                @if (inProgress)
+                {
+                    <td class="text-center bold">@match.HomeTeamScore - @match.AwayTeamScore</td>
+                }
+                else
+                {
+                    <td class="text-center bold">@match.Time</td>
+                }
+                <td class="text-left">@match.AwayTeamName</td>
             </tr>
 
-            @foreach (var match in league.Match)
+            @if (inProgress)
             {
-                @if (validDate != @match.Date)
-                {
-                    validDate = @match.Date;
-                    <tr>
-                        <th colspan="3">
-                            <h4>@match.Date</h4>
-                        </th>
-                    </tr>
-                }
-
-                bool inProgress = !@match.Status.Contains("Kick off");
-
                 <tr>
-                    <td class="text-right">@match.HomeTeamName</td>
-                    @if (inProgress)
+                    <td class="text-right text-muted muted">@match.Status</td>
+                    <td class="text-center text-muted muted">@match.HomeTeamHalfTimeScore - @match.AwayTeamHalfTimeScore</td>
+
+                    @if (@match.Attendance > 0)
                     {
-                        <td class="text-center bold">@match.HomeTeamScore - @match.AwayTeamScore</td>
+                        <td class="text-left text-muted muted">Attendance: @match.Attendance</td>
                     }
                     else
                     {
-                        <td class="text-center bold">@match.Time</td>
+                        <td class="text-left text-muted muted"></td>
                     }
-                    <td class="text-left">@match.AwayTeamName</td>
                 </tr>
-
-                @if (inProgress)
-                {
-                    <tr>
-                        <td class="text-right text-muted muted">@match.Status</td>
-                        <td class="text-center text-muted muted">@match.HomeTeamHalfTimeScore - @match.AwayTeamHalfTimeScore</td>
-
-                        @if (@match.Attendance > 0)
-                        {
-                            <td class="text-left text-muted muted">Attendance: @match.Attendance</td>
-                        }
-                        else
-                        {
-                            <td class="text-left text-muted muted"></td>
-                        }
-                    </tr>
-                }
-
             }
         }
-    </table>
+    }
+</table>
 
