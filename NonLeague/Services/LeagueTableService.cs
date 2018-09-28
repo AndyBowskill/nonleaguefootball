@@ -1,9 +1,7 @@
-using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NonLeague.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace NonLeague.Services
 {
@@ -11,28 +9,22 @@ namespace NonLeague.Services
     {
         public async Task<LeagueTable> GetTable(int competitionID)
         {
-            string responseJson = "";
-            LeagueTableRoot root = new LeagueTableRoot();
-            LeagueTable leagueTable = new LeagueTable();
-            
-            using (var client = new HttpClient())
+            var URI = $"league.json?comp={ competitionID }";
+
+            using (var response = await APIClient.Client.GetAsync(URI))
             {
-                var URI = string.Format("https://www.footballwebpages.co.uk/league.json?comp={0}",competitionID);
-                client.BaseAddress = new Uri(URI);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var response = await client.GetAsync(URI);
-        
                 if (response.IsSuccessStatusCode)
                 {
-                    responseJson = await response.Content.ReadAsStringAsync();
-                    root = JsonConvert.DeserializeObject<LeagueTableRoot>(responseJson);
-                    leagueTable = root.LeagueTable;
+                    string responseJson = await response.Content.ReadAsStringAsync();
+                    LeagueTableRoot root = JsonConvert.DeserializeObject<LeagueTableRoot>(responseJson);
+
+                    return root.LeagueTable;
                 }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }                  
             }
-            
-            return leagueTable;
-            
         }
     }
     

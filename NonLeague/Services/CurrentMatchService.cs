@@ -1,10 +1,8 @@
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 using NonLeague.Models;
 using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NonLeague.Services
 {
@@ -12,60 +10,50 @@ namespace NonLeague.Services
     {
         public async Task<MatchesCompetition> GetFixturesForMonth(int competitionID, int monthID)
         {
-            string responseJson = "";
-            MatchesCompetitionRoot root = new MatchesCompetitionRoot();
-            MatchesCompetition monthsMatches = new MatchesCompetition();
-            
-            using (var client = new HttpClient())
-            {
-                var URI = string.Format("https://www.footballwebpages.co.uk/fixtures-results.json?comp={0}&month={1}",competitionID, monthID);
-                client.BaseAddress = new Uri(URI);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var response = await client.GetAsync(URI);
-        
+            var URI = $"fixtures-results.json?comp={ competitionID }&month={ monthID}";
+
+            using (var response = await APIClient.Client.GetAsync(URI))
+            {        
                 if (response.IsSuccessStatusCode)
                 {
-                    responseJson = await response.Content.ReadAsStringAsync();
-                    root = JsonConvert.DeserializeObject<MatchesCompetitionRoot>(responseJson);
-                    monthsMatches = root.MatchesCompetition;
+                    string responseJson = await response.Content.ReadAsStringAsync();
+                    MatchesCompetitionRoot root = JsonConvert.DeserializeObject<MatchesCompetitionRoot>(responseJson);
+                    return root.MatchesCompetition;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
                 }
 
             }
-            
-            return monthsMatches;
-
         }
 
         public async Task<List<MatchesCompetition>> GetFixturesForToday()
         {
-            string responseJson = "";
-            MatchesCompetitionRoot root = null;
             List<MatchesCompetition> thisWeeksMatches = new List<MatchesCompetition>();
 
             int[] competitionsID = { 5, 6, 7, 14, 8, 39, 11, 15, 16, 9, 10, 12, 13, 40 };
 
             foreach (int competitionID in competitionsID)
             {
-                using (var client = new HttpClient())
-                {
-                    var URI = string.Format("https://www.footballwebpages.co.uk/fixtures-results.json?comp={0}&fixtures=1&results=1", competitionID);
-                    client.BaseAddress = new Uri(URI);
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    var response = await client.GetAsync(URI);
+                var URI = $"fixtures-results.json?comp={ competitionID }&fixtures=1&results=1";
 
+                using (var response = await APIClient.Client.GetAsync(URI))
+                {
                     if (response.IsSuccessStatusCode)
                     {
-                        responseJson = await response.Content.ReadAsStringAsync();
-                        root = JsonConvert.DeserializeObject<MatchesCompetitionRoot>(responseJson);
+                        string responseJson = await response.Content.ReadAsStringAsync();
+                        MatchesCompetitionRoot root = JsonConvert.DeserializeObject<MatchesCompetitionRoot>(responseJson);
                         thisWeeksMatches.Add(root.MatchesCompetition);  
+                    }
+                    else
+                    {
+                        throw new Exception(response.ReasonPhrase);
                     }
                 }
             }
 
             return thisWeeksMatches;
-
         }
     }
     
