@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 
 namespace NonLeague.Services
 {
-    public class APIClient
+    public static class APIClient
     {
         public static HttpClient Client { get; set; }
 
