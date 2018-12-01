@@ -58,6 +58,10 @@ a:hover {
     margin-top: 58px;
 }
 
+.table > tbody > tr > th > h3.first {
+    margin-top: 0px;
+}
+
 .table > tbody > tr > td {
     border-top: 1px solid #eee;
 }

@@ -40,9 +40,16 @@
 <table class="table table-condensed no-gutters-horizontal">
     @foreach (var league in Model)
     {
+        string classFirst = "";
+
+        @if (leagueBodyID == 0)
+        {
+            classFirst = "first";
+        }
+
         <tr id="league-@(++leagueBodyID)">
             <th colspan="3">
-                <h3>@league.Competition</h3>
+                <h3 class=@classFirst>@league.Competition</h3>
             </th>
         </tr>
 
