@@ -1,6 +1,7 @@
 ﻿@model List<NonLeague.Models.MatchesCompetition>
 @{
     ViewData["Title"] = "Fixture / Results";
+    string firstLeague = null;
     string validDate = null;
     int leagueHeaderID = 0;
     int leagueBodyID = 0;
@@ -40,16 +41,18 @@
 <table class="table table-condensed no-gutters-horizontal">
     @foreach (var league in Model)
     {
-        string classFirst = "";
-
         @if (leagueBodyID == 0)
         {
-            classFirst = "first";
+            firstLeague = "first";
+        }
+        else
+        {
+            firstLeague = null;
         }
 
         <tr id="league-@(++leagueBodyID)">
             <th colspan="3">
-                <h3 class=@classFirst>@league.Competition</h3>
+                <h3 class=@firstLeague>@league.Competition</h3>
             </th>
         </tr>
 
