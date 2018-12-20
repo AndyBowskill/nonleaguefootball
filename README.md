@@ -1,2 +1,2 @@
 # www.nonleaguefootball.info
-Non-League Football website using C# and ASP.NET Core.
+Non-league football website using C# and ASP.NET Core.
