@@ -8,8 +8,6 @@ namespace NonLeague.Services
     {
         Task<MatchesCompetition> GetFixturesForMonth(int competitionID, int monthID);
         Task<List<MatchesCompetition>> GetFixturesForToday();
-       
-
     }
     
 }
