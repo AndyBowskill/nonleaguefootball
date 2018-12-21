@@ -50,7 +50,7 @@ namespace Tests.UnitTests
             Assert.Equal(3, model.Count());
         }
 
-        private IEnumerable<League> GetTestLeagues()
+        private List<League> GetTestLeagues()
         {
             var leagueList = new List<League>() {
                 new League() { Competition = "Vanarama National League South", CompetitionID = 7, Step = 2 },
