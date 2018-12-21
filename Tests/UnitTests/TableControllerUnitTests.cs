@@ -14,7 +14,7 @@ namespace Tests.UnitTests
     {
         [Fact]
         public async Task Index_ReturnsWithAViewResult_WithALeagueTable()
-        {
+        {   
             // Arrange
             int tableID = 5;
             var serviceMock = new Mock<ITableService>();
