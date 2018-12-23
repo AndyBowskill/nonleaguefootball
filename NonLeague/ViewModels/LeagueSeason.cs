@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using NonLeague.Models;
 
-namespace NonLeague.Helper
+namespace NonLeague.ViewModels
 {
-    public class LeagueSeasonHelper
+    public class LeagueSeason
     {
         public int CompetitionID { get; set; }
         public string Competition { get; set; }

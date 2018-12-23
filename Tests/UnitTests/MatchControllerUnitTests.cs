@@ -19,9 +19,11 @@ namespace Tests.UnitTests
             // Arrange
             int competitionID = 5;
             int monthID = 8;
-            var serviceMock = new Mock<IMatchService>();
-            serviceMock.Setup(x => x.GetFixturesForMonth(competitionID, monthID)).ReturnsAsync(GetTestMatchesCompetition());
-            var controller = new MatchController(serviceMock.Object);
+            var matchMock = new Mock<IMatchService>();
+
+            matchMock.Setup(x => x.GetFixturesForMonth(competitionID, monthID)).ReturnsAsync(GetTestMatchesCompetition());
+
+            var controller = new MatchController(matchMock.Object);
 
             // Act
             var result = await controller.Index(competitionID, monthID);

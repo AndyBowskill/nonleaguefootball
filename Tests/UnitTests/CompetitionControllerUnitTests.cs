@@ -35,11 +35,12 @@ namespace Tests.UnitTests
         public void Table_ReturnsWithAViewResult_WithAListOfLeagues()
         {
             // Arrange
-            var serviceMock = new Mock<ILeagueService>();
+            var leagueMock = new Mock<ILeagueService>();
             var hostingMock = new Mock<IHostingEnvironment>();
 
-            serviceMock.Setup(x => x.GetAll(hostingMock.Object.WebRootPath)).Returns(GetTestLeagues());
-            var controller = new CompetitionController(serviceMock.Object, hostingMock.Object);
+            leagueMock.Setup(x => x.GetAll(hostingMock.Object.WebRootPath)).Returns(GetTestLeagues());
+
+            var controller = new CompetitionController(leagueMock.Object, hostingMock.Object);
 
             // Act
             var result = controller.Table();

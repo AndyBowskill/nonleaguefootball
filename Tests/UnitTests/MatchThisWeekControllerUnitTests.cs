@@ -17,9 +17,11 @@ namespace Tests.UnitTests
         public async Task Index_ReturnsWithAViewResult_WithAListOfMatchesCompetitions()
         {
             // Arrange
-            var serviceMock = new Mock<IMatchService>();
-            serviceMock.Setup(x => x.GetFixturesForToday()).ReturnsAsync(GetTestMatchesCompetitions());
-            var controller = new MatchThisWeekController(serviceMock.Object);
+            var matchMock = new Mock<IMatchService>();
+
+            matchMock.Setup(x => x.GetFixturesForToday()).ReturnsAsync(GetTestMatchesCompetitions());
+
+            var controller = new MatchThisWeekController(matchMock.Object);
 
             // Act
             var result = await controller.Index();

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NonLeague.Controllers;
-using NonLeague.Helper;
+using NonLeague.ViewModels;
 using NonLeague.Models;
 using NonLeague.Services;
 using System.Collections.Generic;
@@ -24,11 +24,6 @@ namespace Tests.UnitTests
 
             leagueMock.Setup(x => x.GetCompetition(competitionID, hostingMock.Object.WebRootPath)).Returns(GetTestCompetition());
             seasonMock.Setup(x => x.GetSeason(hostingMock.Object.WebRootPath)).Returns(GetTestSeason());
-            var leagueSeasonHelper = new LeagueSeasonHelper() {
-                CompetitionID = competitionID,
-                Competition = GetTestCompetition(),
-                Season = GetTestSeason()
-            };
 
             var controller = new SeasonController(seasonMock.Object, leagueMock.Object, hostingMock.Object);
 
@@ -37,7 +32,7 @@ namespace Tests.UnitTests
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var model = Assert.IsAssignableFrom<LeagueSeasonHelper>(viewResult.ViewData.Model);
+            var model = Assert.IsAssignableFrom<LeagueSeason>(viewResult.ViewData.Model);
             Assert.Equal(3, model.Season.Count());
         }
 

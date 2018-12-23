@@ -17,9 +17,11 @@ namespace Tests.UnitTests
         {   
             // Arrange
             int tableID = 5;
-            var serviceMock = new Mock<ITableService>();
-            serviceMock.Setup(x => x.GetTable(tableID)).ReturnsAsync(GetTestLeagueTable());
-            var controller = new TableController(serviceMock.Object);
+            var tableMock = new Mock<ITableService>();
+
+            tableMock.Setup(x => x.GetTable(tableID)).ReturnsAsync(GetTestLeagueTable());
+
+            var controller = new TableController(tableMock.Object);
 
             // Act
             var result = await controller.Index(tableID);
