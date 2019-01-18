@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using NonLeague.Helper;
+using NonLeague.ViewModels;
 using NonLeague.Services;
 
 namespace NonLeague.Controllers
@@ -22,14 +22,14 @@ namespace NonLeague.Controllers
         [HttpGet("{competitionID:int}")]
         public IActionResult Index(int competitionID)
         {
-            var leagueSeasonHelper = new LeagueSeasonHelper
+            var leagueSeason = new LeagueSeason
             {
                 CompetitionID = competitionID,
                 Competition = _leagueService.GetCompetition(competitionID, _hostingEnvironment.WebRootPath),
                 Season = _seasonService.GetSeason(_hostingEnvironment.WebRootPath)
             };
 
-            return View(leagueSeasonHelper);
+            return View(leagueSeason);
         }
 
     }
