@@ -14,7 +14,7 @@ namespace NonLeague.Controllers
     {
         private readonly ILeagueService _leagueService;
         private readonly IHostingEnvironment _hostingEnvironment;
-
+        
         public CompetitionController(ILeagueService leagueService, IHostingEnvironment hostingEnvironment)
         {
             _leagueService = leagueService;

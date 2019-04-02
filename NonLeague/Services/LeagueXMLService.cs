@@ -15,7 +15,7 @@ namespace NonLeague.Services
         public IEnumerable<League> GetAll(string webRoot) 
         {
             var leagues = GetLeaguesFromXML(webRoot);
-            leagueList = new List<League>();
+            leagueList = new List<League>();    
             
             foreach (var item in leagues)
             {
